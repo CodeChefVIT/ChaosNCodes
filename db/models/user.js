@@ -1,0 +1,64 @@
+var mongoose=require("mongoose");
+
+var user=new mongoose.Schema({
+	lang:{
+		type:String
+	},
+	verified:{
+		type:String,
+		default:false
+	},
+	name:{
+		type:String,
+		required:true
+	},
+	phone:{
+		type:String,
+		required:true
+	},
+	otp:{
+		type:String,
+	},
+	location:{
+		type:String,
+		required:false
+	},
+	listings:[
+		{
+			listing:{
+				type:mongoose.Schema.Types.ObjectId,
+				ref:"listings"
+			}
+		}
+	],
+	bids:[
+		{
+			bid:{
+				type:mongoose.Schema.Types.ObjectId,
+				ref:"bids"
+			},
+			type:{
+				type:String,
+				default:"made"
+			}
+		}
+	],
+	reports:[
+		{
+			user:{
+				type:mongoose.Schema.Types.ObjectId,
+				ref:"user"
+			},
+			type:{
+				type:String,
+				default:"product-quality" //product-quality,delayed-delivery,fraudulent-behavior
+			},
+			message:{
+				type:String
+			}
+		}
+	],
+	newsfeed_keywords:[]
+});
+
+module.exports=mongoose.model("user",user);
