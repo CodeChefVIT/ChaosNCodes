@@ -2,6 +2,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="/js/login.js"></script>
@@ -12,31 +13,59 @@
         justify-content: center;
         align-items: center;
       }
+      .nav-bar{
+        background-color: #002540
+      }
     </style>
 
 </head>
-<body>
-  <nav>
-
+<body style="background-color:#F3F4F6">
+  <nav class="nav-wrapper nav-bar">
+    <a href="#" style="margin-left:20px" class="brand-logo">Farmazon</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/">Home</a></li>
+        <li><a href="/">Marketplace</a></li>
+        <li><a href="/">Newsfeed</a></li>
+        <li><a href="/">About us</a></li>
+        <li><a href="/">Contact us</a></li>
+      </ul>
   </nav>
   <div class="flex-container col s10 m6 l4">
     <div class="col s12">
-      <form id="login-form" class="col s12">
-        <div id="PHONE" class="row">
-          <div class="input-field col s12">
-            <input id="phone" type="text" class="validate">
-            <label for="phone">Phone</label>
+      <br><br>
+          <form id="login-form" class="col s12">
+            <div id="PHONE" class="row">
+              <div class="input-field col s12">
+                <input id="phone" type="text" class="validate">
+                <label for="phone">Phone</label>
+              </div>
+            </div>
+            <div class="switch">
+              <label>
+                Face Recognition
+                <input id="choice" type="checkbox">
+                <span class="lever"></span>
+                OTP
+              </label>
+            </div>
+            <div class="row" id="OTP" style="display:none;">
+              <div class="input-field col s12">
+                <input id="otp" type="password" class="validate">
+                <label for="otp">OTP</label>
+              </div>
+            </div>
+            <div id="file" class="file-field input-field">
+            <div class="btn">
+              <span>File</span>
+              <input type="file">
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text">
+            </div>
           </div>
-        </div>
-        <div class="row" id="OTP" style="">
-          <div class="input-field col s12">
-            <input id="otp" type="password" class="validate">
-            <label for="otp">OTP</label>
-          </div>
-        </div>
-        <input id="button" value="Login" type="submit" class="col s12 waves-effect waves-light btn">
-        <div id="error"></div>
-      </form>
+            <input id="login-button" value="Login" style="width:100%;" type="submit" class="col s12 waves-effect waves-light btn">
+            <div id="error"></div>
+          </form>
     </div>
   </div>
   <div></div>

@@ -1,5 +1,9 @@
 var User=require(process.cwd()+"/db/models/user.js");
 
+const { spawn } = require('child_process');
+
+var match=require(process.cwd()+'/face_rec.js')
+
 module.exports.user={
 	create:function(name,phone,location,lang,otp){
 		return new Promise(function(resolve,reject){
@@ -97,6 +101,29 @@ module.exports.user={
 						return reject({success:false,code:404,message:"User not found"});
 					}
 					return resolve({success:true,message:"User found",data:result,code:200});
+				})
+				.catch(function(err){
+					console.log(err);
+					return reject({success:false,message:"Application Error",code:500});
+				});
+		});
+	},
+	face_login:function(phone,path){
+		return new Promise(function(resolve,reject){
+			let user;
+			return User.findOne({phone:phone})
+				.then(function(result){
+					if(result==null){
+						return reject({success:false,code:404,message:"User not found"});
+					}
+					user=result;
+					return match(result.face_rec,path)
+				})
+				.then(function(result){
+					if(result==null){
+						return reject({success:false,code:404,message:"User not found"});
+					}
+					return resolve({success:true,message:"User found",data:user,code:200});
 				})
 				.catch(function(err){
 					console.log(err);

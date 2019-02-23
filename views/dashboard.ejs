@@ -1,5 +1,117 @@
 <!doctype html>
 <html>
-<head></head>
-<body></body>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/js/dashboard.js"></script>
+    <style>
+    .nav-bar{
+      position: absolute;
+      top:0;
+      z-index: 1;
+      background-color: #002540
+    }
+    .item{
+      display: flex;
+      justify-content: center;
+      margin-top: 10px !important;
+      margin-bottom: 10px;
+    }
+    .item-division{
+      width:50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .item-division2{
+      width:50%;
+      display: flex;
+      flex-direction: column;
+    }
+    .img-item{
+      border-radius: 50%;
+      width:100px;
+      height: 100px;
+    }
+    .item-details{
+
+    }
+    .current{
+      border-bottom-color: #F60100;
+      font-size: 25px;
+      border-bottom-width: 2px;
+      border-bottom-style: solid;
+      width: 300px;
+      text-align: center;
+    }
+    </style>
+
+</head>
+<body>
+  <nav class="nav-wrapper nav-bar">
+    <a href="#" style="margin-left:20px" class="brand-logo"><%= name %></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/">Marketplace</a></li>
+        <li><a href="/">Newsfeed</a></li>
+        <li><a href="/">Transactions</a></li>
+        <li><button class="waves-effect waves-light btn" style="margin-right:10px;background-color:#F60100;">Logout</button></li>
+      </ul>
+  </nav>
+  <br><br><br><br><br><br>
+  <div class="container-fluid">
+    <div class="row" style="display:flex;justify-content: center;">
+      <div class="col s10 m6 l4" style="margin:0 auto;">
+        <div class="current" style="margin:0 auto;">Current listings</div>
+        <br>
+        <div class="collection">
+        <% listings.forEach(function(listing){ %>
+          <% if(!listing.listing.expired) { %>
+            <div class="collection-item item">
+              <div class="item-division">
+                <img class="img-item" src="<%= listing.listing.image %>">
+              </div>
+              <div class="item-division2">
+                <div><%= listing.listing.name %></div>
+                <div><%= listing.listing.date %></div>
+                <div><%= listing.listing.type %></div>
+                <div><%= listing.listing.quantity %></div>
+                <button class="waves-effect waves-light btn" onclick="fetchData(<%= listing.listing._id %>)">Learn more</button>
+              </div>
+            </div>
+          <% } %>
+        <% }) %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br><br><br>
+  <div class="container-fluid">
+    <div class="row" style="display:flex;justify-content: center;">
+      <div class="col s10 m6 l4" style="margin:0 auto;">
+        <div class="current" style="margin:0 auto;">Expired listings</div>
+        <br>
+        <div class="collection">
+        <% listings.forEach(function(listing){ %>
+          <% if(listing.listing.expired) { %>
+            <div class="collection-item item">
+              <div class="item-division">
+                <img class="img-item" src="<%= listing.listing.image %>">
+              </div>
+              <div class="item-division2">
+                <div><%= listing.listing.name %></div>
+                <div><%= listing.listing.date %></div>
+                <div><%= listing.listing.type %></div>
+                <div><%= listing.listing.quantity %></div>
+                <button class="waves-effect waves-light btn" onclick="fetchData(<%= listing.listing._id %>)">Learn more</button>
+              </div>
+            </div>
+          <% } %>
+        <% }) %>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
 </html>
