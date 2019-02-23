@@ -70,15 +70,12 @@ module.exports={
 		if(req.body.phone==undefined || req.body.otp==undefined){
 			return res.json({success:false,message:"Enter all the details",code:500});
 		}
-		if(req.body.login_type==0){
-			return user.face_login(req.body.phone,req.body.face_rec);
-		}
 		return user.login(req.body.phone,req.body.otp)
 			.then(function(result){
 				if(result.success==false){
 					return res.json({success:false,message:"Incorrect OTP entered"});
 				}
-				return jwt.sign({id:result._id}.process.env.JWT_SECRET,function(err,token){
+				return jwt.sign({id:result.data._id,name:result.data.name},process.env.JWT_SECRET,function(err,token){
 					if(err){
 						return res.json({success:false,message:"Application Error",code:500});
 					}

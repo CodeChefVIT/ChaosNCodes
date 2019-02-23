@@ -24,7 +24,6 @@
     <a href="#" style="margin-left:20px" class="brand-logo">Farmazon</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="/">Home</a></li>
-        <li><a href="/marketplace">Marketplace</a></li>
         <li><a href="/">Newsfeed</a></li>
         <li><a href="/">About us</a></li>
         <li><a href="/">Contact us</a></li>
@@ -40,29 +39,12 @@
                 <label for="phone">Phone</label>
               </div>
             </div>
-            <div class="switch">
-              <label>
-                Face Recognition
-                <input id="choice" type="checkbox">
-                <span class="lever"></span>
-                OTP
-              </label>
-            </div>
-            <div class="row" id="OTP" style="display:none;">
+            <div id="OTP" class="row">
               <div class="input-field col s12">
-                <input id="otp" type="password" class="validate">
+                <input id="otp" type="text" class="validate">
                 <label for="otp">OTP</label>
               </div>
             </div>
-            <div id="file" class="file-field input-field">
-            <div class="btn">
-              <span>File</span>
-              <input type="file">
-            </div>
-            <div class="file-path-wrapper">
-              <input class="file-path validate" type="text">
-            </div>
-          </div>
             <input id="login-button" value="Login" style="width:100%;" type="submit" class="col s12 waves-effect waves-light btn">
             <div id="error"></div>
           </form>

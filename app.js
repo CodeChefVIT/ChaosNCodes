@@ -46,10 +46,10 @@ function authorise(req,res,next){
 }
 
 app.get("/",function(req,res){
-	if(req.cookies["Authorization"]){
-		return res.render("dashboard");
+	if(req.cookies["FF"]){
+		return res.redirect("dashboard");
 	}
-	return res.render("index",{message:"NUunu"});
+	return res.render("index");
 });
 
 app.get("/login",function(req,res){
@@ -64,19 +64,14 @@ app.get('/marketplace',authorise,function(req,res){
   getProducts(req,res);
 });
 
-
-app.get('/add',function(req,res){
+app.get('/add',authorise,function(req,res){
   res.render("product-add")
 })
 
 app.get('/prediction',function(req,res){
   return res.render("prediction",{crops:[{image:'/images/wheat.jpg',name:"wheat",profit:"10000"},{image:'/images/wheat.jpg',name:"wheat",profit:"10000"},{image:'/images/wheat.jpg',name:"wheat",profit:"10000"}]})
 })
-//
-// app.get('/marketplace/prediction',authorise,function(req,res){
-// 	return res.sendFile(process.cwd()+'/views/prediction.html');
-// });
-//
+
 app.use("/api",router);
 
 module.exports=app;

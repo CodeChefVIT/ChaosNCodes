@@ -33,6 +33,7 @@ router.post("/signup",function(req,res){
 	return signup(req,res);
 });
 router.post("/login",function(req,res){
+  console.log("logging in")
 	return login(req,res);
 });
 router.post("/genOTP",function(req,res){
@@ -41,7 +42,8 @@ router.post("/genOTP",function(req,res){
 });
 router.post("/logout",function(req,res){
   res.clearCookie("FF");
-  return res.render("home",{message:"Logged out successfully."})
+  console.log("Logging out")
+  return res.redirect("/")
 })
 
 module.exports=router;
