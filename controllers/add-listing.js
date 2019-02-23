@@ -27,15 +27,12 @@ module.exports={
 			});
 	},
 	getListing:function(req,res){
-		if(req.body.listing==undefined){
-			return res.json({success:false,message:"Enter all the details",code:500});
-		}
-		return products.getListing(req.body.listing,req.session.user_id)
+		return user.findUser(req.body.id)
 			.then(function(result){
 				if(result.success==false){
 					return res.json({success:false,message:"Error finding listing",code:400});
 				}
-				return res.render("listing",{data:result.data});
+					return res.render("dashboard",{name:result.data.name,listings:result.data.listings});
 			})
 			.catch(function(err){
 				return res.json({success:false,message:"Application Error",code:500});

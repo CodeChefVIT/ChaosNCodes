@@ -7,32 +7,16 @@ var ejs=require("ejs");
 
 var jwt=require("jsonwebtoken");
 
-// var MongoDBStore = require('connect-mongodb-session')(session);
-//
-// var store = new MongoDBStore({
-//   uri: process.env.DB_URL,
-//   collection: 'session'
-// });
+var fetchDashboard=require("./controllers/add-listing.js").getListing;
+var getProducts=require("./controllers/get-products").getProducts;
 
 var router=require(process.cwd()+'/routes/export.js')
 
 var app = express();
 
-// store.on('error', function(error) {
-//   console.log("Error connecting to session database: "+error);
-// });
 
 app.disable("x-powered-by");
 app.set('trust proxy', 1) // trust first proxy
-// app.use(session({
-// 	key:'FellowFarmers',
-//   secret: 'ijeidji333nexniwmi9s2nqidij',
-//   resave: true,
-// 	store:store,
-//   saveUninitialized: true,
-//   cookie: { secure: true }
-// }))
-
 
 app.use(helmet());
 
@@ -50,10 +34,10 @@ function authorise(req,res,next){
   let token=req.cookies["FF"];
   return jwt.verify(token,process.env.JWT_SECRET,function(err,result){
     if(err){
-        return res.render("login",{message:"Please login"});
+        return res.redirect("login");
     }
     if(result.id==undefined){
-      return res.render("login",{message:"Please login"});
+      return res.redirect("login");
     }
     req.body.id=result.id;
     req.body.name=result.name;
@@ -72,26 +56,15 @@ app.get("/login",function(req,res){
 	return res.render("login");
 });
 
-// app.get('/newsfeed',function(req,res){
-// 	return res.sendFile(process.cwd()+'/views/newsfeed.html');
-// });
-//
-app.get('/dashboard',function(req,res){
-  // fetchDashboard(req,res);
-	return res.render("dashboard",{name:"Vatsal",listings:[{listing:{image:"/images/coffee.jpg",expired:false,date:"21-10-2018",_id:"ebxuben",product_type:"coffee", type:"buy",quantity:10}},{listing:{image:"/images/coffee.jpg",expired:false,date:"21-10-2018",_id:"ebxuben",product_type:"coffee", type:"buy",quantity:10}},{listing:{image:"/images/coffee.jpg",expired:true,date:"21-10-2018",_id:"ebxuben",product_type:"coffee", type:"buy",quantity:10}}]});
+app.get('/dashboard',authorise,function(req,res){
+  fetchDashboard(req,res);
 });
-//
-// app.get('/newsfeed',authorise,function(req,res){
-// 	return res.sendFile(process.cwd()+'/views/farmernewsfeed.html');
-// });
-//
-// app.get('/dashboard/transactions',authorise,function(req,res){
-// 	return res.sendFile(process.cwd()+'/views/farmertransactions.html');
-// });
-//
+
 app.get('/marketplace',authorise,function(req,res){
-	return res.sendFile(process.cwd()+'/views/marketplace.html');
+  getProducts(req,res);
 });
+
+
 app.get('/add',function(req,res){
   res.render("product-add")
 })

@@ -67,9 +67,9 @@ module.exports.products={
 				});
 		});
 	},
-	getProducts:function(product_type,type){
+	getProducts:function(){
 		return new Promise(function(resolve,reject){
-			return listing.find({product_type:product_type,type:type},"name image date price")
+			return listing.find({},"name image date price")
 				.then(function(result){
 					if(result==null){
 						return reject({success:false,code:401,message:"Error getting listings"});

@@ -2,12 +2,12 @@ var {products}=require(process.cwd()+"/db/functions/create-listing.js");
 
 module.exports={
 	getProducts:function(req,res){
-		products.getProducts(req.body.type,req.body.intent)
+		products.getProducts()
 			.then(function(result){
 				if(result.success==false){
 					return res.json({success:false,message:"Error finding products"});
 				}
-				return res.render("marketplace",{products:result.data,type:req.body.type,intent:req.body.intent});
+				return res.render("marketplace",{name:req.body.name,listings:result.data});
 			})
 			.catch(function(err){
 				return res.json({success:false,message:"Application Error",code:500});
@@ -19,7 +19,7 @@ module.exports={
 				if(result.success==false){
 					return res.json({success:false,message:"Error finding products"});
 				}
-				return res.render("product",{data:result.data});
+				return res.render("product",{name:req.body.name,data:result.data});
 			})
 			.catch(function(err){
 				return res.json({success:false,message:"Application Error",code:500});
