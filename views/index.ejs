@@ -3,18 +3,121 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="Mihir">
-    <meta name="description" content="FellowFarmer Updated">
+    <meta name="author" content="Vatsal Mihir">
+    <meta name="description" content="Farmazon Updated">
     <meta name="keywords" content="">
 
-    <title>Fellow Farmer Landing Page | Website</title>
+    <title>Farmazon Landing Page | Website</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="/js/index.js"></script>
     <style>
+
+    span{
+      color:#F9F6A1;
+    }
+
+    .flip-card{
+      background-color: transparent;
+      width:300px;
+      height:300px;
+      perspective:1000px;
+      border-radius: 50%;
+      margin:2px;
+    }
+
+    .flip-card-inner{
+      position:relative;
+      width:100%;
+      height:100%;
+      text-align:center;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+      border-radius: 50%;
+    }
+
+    .flip-card:hover .flip-card-inner{
+      transform: rotateY(180deg);
+      border-radius: 50%;
+    }
+
+    .flip-card-front img{
+      border-radius: 50%;
+    }
+
+    .flip-card-front, .flip-card-back{
+      position:absolute;
+      width:100%;
+      height:100%;
+      backface-visibility: hidden;
+      border-radius: 50%;
+    }
+
+    .flip-card-front{
+      background-color:black;
+      color:black;
+      border-radius: 50%;
+    }
+
+    .flip-card-back{
+      background-color:white;
+      color:forestgreen;
+      transform:rotateY(180deg);
+      border-radius: 50%;
+      text-align: center;
+    }
+
+    .flip-card-back h3{
+      font-size: 30px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .flip-card-back p{
+      font-size: 20px;
+      color:black;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    #second{
+      color:#99DA69;
+    }
+
+    #contact{
+      background-color: rgb(0,100,0,0.5);
+    }
+
+    #file{
+      color: #F9F6A1;
+      font-weight: bold;
+    }
+
+    #namelabel,#phonelabel{
+      color:black;
+      font-weight: bold;
+    }
+
+    #show{
+        margin-right:150px;
+    }
+
+    #signup-form{
+      background-color: rgba(255,255,255,0.4);
+      padding:30px;
+      min-width:500px;
+      margin-left:30px;
+    }
+
+    #button{
+      color:#F9F6A1;
+      font-weight: bold;
+    }
+
       .flex-container {
         display: flex;
         height: 300px;
@@ -25,8 +128,14 @@
         position: absolute;
         top:0;
         z-index: 1;
-        background-color: #002540
+        background-color:rgb(255,255,255,0.3);
       }
+
+      .nav-bar a{
+          color:#99DA69;
+          font-size: 20px;
+      }
+
       .landing{
         position: relative;
         top:0;
@@ -65,6 +174,8 @@
       .about-body{
         font-size:15px;
       }
+
+
       /* .message{
         position: absolute;
         top:30px;
@@ -94,21 +205,22 @@
       <img class="landing-image" src="/images/background.jpg">
       <div class="landing-container">
         <div class="flex-container col s12 m6 l6">
-          <h1><span>Plant better,<br></span>
-          Earn better</h1>
+          <h1 id="show"><span>Plant better,<br></span>
+          <span id="second">Earn better</span></h1>
         </div>
+
         <div class="flex-container col s12 m6 l6">
           <form id="signup-form" class="col s12">
             <div id="NAME" class="row">
               <div class="input-field col s12">
                 <input id="name" type="text" class="validate">
-                <label for="name">Name</label>
+                <label for="name" id="namelabel">Name</label>
               </div>
             </div>
             <div id="PHONE" class="row">
               <div class="input-field col s12">
                 <input id="phone" type="text" class="validate">
-                <label for="phone">Phone</label>
+                <label for="phone" id="phonelabel">Phone</label>
               </div>
             </div>
             <div id="OTP" class="row">
@@ -127,29 +239,120 @@
             </div>
             <div class="file-field input-field">
             <div class="btn">
-              <span>File</span>
+              <span id="file"><i class="fa fa-upload"></i>File</span>
               <input type="file">
             </div>
             <div class="file-path-wrapper">
               <input class="file-path validate" type="text">
             </div>
           </div>
-            <input id="button" value="Signup" style="width:100%" type="submit" class="waves-effect waves-light btn">
+            <input id="button" value="Signup" style="width:100%;" type="submit" class="waves-effect waves-light btn">
             <div id="error"></div>
           </form>
         </div>
+
       </div>
     </div>
     <br><br>
     <div class="container-fluid">
-    <div class="row" style="display:flex;justify-content: center;align-items: center;">
-    <div class="col s12 m10 l8" style="margin:0 auto;">
-      <div class="about-header">About us</div>
-      <br>
-      <div class="about-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+      <div class="row" style="display:flex;justify-content: center;align-items: center;">
+        <div class="col s12 m10 l8" style="margin:0 auto;">
+          <div class="about-header">About us</div>
+          <br>
+          <div class="about-body">This place is for the farmers, the ones who give us food, the ones behind our daily meals. We aim at making their lives better with our website.</div>
+        </div>
+      </div>
     </div>
-  </div>
+
+  <section id="contact">
+    <div class="container-fluid">
+      <div class="row" style="display:flex;justify-content: center;align-items: center;">
+        <div class="col s12 m10 l8" style="margin:0 auto;">
+          <div class="about-header">Contact</div>
+          <br>
+          <div class="row">
+            <div class="col s4">
+              <div class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <img src="images/healthcare.jpg" alt="Avatar" responsive width="300px" height="300px">
+                  </div>
+                  <div class="flip-card-back">
+                    <br><br><br><br>
+                    <h3>Manasa</h3>
+                    <p>Electrical</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col s4">
+              <div class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <img src="images/research.jpg" alt="Avatar" responsive width="300px" height="300px">
+                  </div>
+                  <div class="flip-card-back">
+                    <br><br><br><br>
+                    <h3>Vatsal</h3>
+                    <p>Website</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col s4">
+              <div class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <img src="images/humanresource.jpg" alt="Avatar" responsive width="300px" height="300px">
+                  </div>
+                  <div class="flip-card-back">
+                    <br><br><br><br>
+                    <h3>Radhika</h3>
+                    <p>Human Resource</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+
+          <div class="row">
+            <div class="col s8">
+              <div class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <img src="images/healthcare.jpg" alt="Avatar" responsive width="300px" height="300px">
+                  </div>
+                  <div class="flip-card-back">
+                    <br><br><br><br>
+                    <h3>Arun</h3>
+                    <p>Machine Learning and Algorithms</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col s4">
+              <div class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <img src="images/technical.jpg" alt="Avatar" responsive width="300px" height="300px">
+                  </div>
+                  <div class="flip-card-back">
+                    <br><br><br><br>
+                    <h3>Mihir</h3>
+                    <p>Website</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </section>
 
   </body>
 </html>
