@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/js/prediction.js"></script>
+    <style>
+    .nav-bar{
+      position: absolute;
+      top:0;
+      z-index: 1;
+      background-color: #002540
+    }
+    .predict_header{
+      border-bottom-color: #F60100;
+      font-size: 18px;
+      border-bottom-width: 2px;
+      padding-bottom: 5px;
+      border-bottom-style: solid;
+      width: 300px;
+      text-align: center;
+      margin:0 auto;
+    }
+    </style>
+    <nav class="nav-wrapper nav-bar">
+      <a href="#" style="margin-left:20px" class="brand-logo">Farmazon</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="/dashboard">Dashboard</a></li>
+          <li><a href="/">Marketplace</a></li>
+          <li><a href="/">Newsfeed</a></li>
+          <li><a href="/">Transactions</a></li>
+          <li><button class="waves-effect waves-light btn" style="margin-right:10px;background-color:#F60100;">Logout</button></li>
+        </ul>
+    </nav>
+    <br><br><br><br>
+    <div class="container-fluid">
+      <div class="row" style="display:flex;justify-content: center;">
+        <div class="col s11 m6 l5" style="margin:0 auto;">
+          <form id="add-form" class="col s12" style="margin:0 auto;">
+            <div class="predict_header">Add your listing.</div>
+            <br><br>
+            <div id="PRODUCT" class="row">
+              <div class="input-field col s12 l6 m6">
+                <select id="product_type" class="icons">
+                <option value="" disabled selected>Choose your option</option>
+                <option value="coffee" data-icon="/images/coffee.jpg" class="left">coffee</option>
+                <option value="maize" data-icon="/images/maize.jpg" class="left">maize</option>
+                <option value="onion" data-icon="/images/onion.jpg" class="left">onion</option>
+                <option value="pepper" data-icon="/images/pepper.jpg" class="left">pepper</option>
+                <option value="pulses" data-icon="/images/pulses.jpg" class="left">pulses</option>
+                <option value="soybean" data-icon="/images/soybean.jpg" class="left">soybean</option>
+                <option value="tea" data-icon="/images/tea.jpg" class="left">tea</option>
+                <option value="wheat" data-icon="/images/wheat.jpg" class="left">wheat</option>
+              </select>
+              <label>Choose your crop</label>
+              </div>
+              <div class="input-field col s12 l6 m6">
+                <select id="product_type">
+                  <option value="buy">Buy</option>
+                  <option value="sell">Sell</option>
+                </select>
+                <label>Buy or sell</label>
+              </div>
+            </div>
+            <div id="QNT" class="row">
+              <div class="input-field col s12 l6 m6">
+                <input id="date" type="text" class="datepicker">
+                <label for="date">Date</label>
+              </div>
+              <div class="input-field col s12 l6 m6">
+                <input id="quantity" type="number" class="validate">
+                <label for="quantity">Quantity</label>
+              </div>
+            </div>
+            <div id="PRICE" class="row">
+              <div class="input-field col s12 l6 m6">
+                <input id="price" type="number" class="validate">
+                <label for="price">Price</label>
+              </div>
+              <div class="col s12 l6 m6" style="padding-top:15px;">
+                <button class="waves-effect waves-light btn" style="width:100%;">Get correct price</button>
+              </div>
+            </div>
+            <br><br>
+            <input id="prediction" value="Get your crops now" style="width:100%;" type="submit" class="col s12 waves-effect waves-light btn">
+          </form>
+        </div>
+      </div>
+    </div>
+</head>

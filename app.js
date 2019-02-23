@@ -47,7 +47,7 @@ app.use(express.static(process.cwd()+"/public"));
 
 
 function authorise(req,res,next){
-  let token=req.cookies["Authorization"];
+  let token=req.cookies["FF"];
   return jwt.verify(token,process.env.JWT_SECRET,function(err,result){
     if(err){
         return res.render("login",{message:"Please login"});
@@ -81,7 +81,7 @@ app.get('/dashboard',function(req,res){
 	return res.render("dashboard",{name:"Vatsal",listings:[{listing:{image:"/images/coffee.jpg",expired:false,date:"21-10-2018",_id:"ebxuben",product_type:"coffee", type:"buy",quantity:10}},{listing:{image:"/images/coffee.jpg",expired:false,date:"21-10-2018",_id:"ebxuben",product_type:"coffee", type:"buy",quantity:10}},{listing:{image:"/images/coffee.jpg",expired:true,date:"21-10-2018",_id:"ebxuben",product_type:"coffee", type:"buy",quantity:10}}]});
 });
 //
-// app.get('/dashboard/newsfeed',authorise,function(req,res){
+// app.get('/newsfeed',authorise,function(req,res){
 // 	return res.sendFile(process.cwd()+'/views/farmernewsfeed.html');
 // });
 //
@@ -92,6 +92,13 @@ app.get('/dashboard',function(req,res){
 app.get('/marketplace',authorise,function(req,res){
 	return res.sendFile(process.cwd()+'/views/marketplace.html');
 });
+app.get('/add',function(req,res){
+  res.render("product-add")
+})
+
+app.get('/prediction',function(req,res){
+  return res.render("prediction",{crops:[{image:'/images/wheat.jpg',name:"wheat",profit:"10000"},{image:'/images/wheat.jpg',name:"wheat",profit:"10000"},{image:'/images/wheat.jpg',name:"wheat",profit:"10000"}]})
+})
 //
 // app.get('/marketplace/prediction',authorise,function(req,res){
 // 	return res.sendFile(process.cwd()+'/views/prediction.html');

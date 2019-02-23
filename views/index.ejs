@@ -13,7 +13,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+    <script src="/js/index.js"></script>
     <style>
       .flex-container {
         display: flex;
@@ -89,10 +89,8 @@
       <a href="#" style="margin-left:20px" class="brand-logo">Farmazon</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li><a href="/login">Login</a></li>
-          <li><a href="/">Marketplace</a></li>
-          <li><a href="/">Newsfeed</a></li>
-          <li><a href="/">About us</a></li>
-          <li><a href="/">Contact us</a></li>
+          <li><a href="/market">Marketplace</a></li>
+          <li><a href="/newsfeed">Newsfeed</a></li>
         </ul>
     </nav>
     <div class="landing">
@@ -116,9 +114,15 @@
                 <label for="phone">Phone</label>
               </div>
             </div>
+            <div id="OTP" class="row">
+              <div class="input-field col s12">
+                <input id="otp" type="text" class="validate">
+                <label for="otp">OTP</label>
+              </div>
+            </div>
             <div id="LOCATION" class="row">
               <div class="input-field col s12">
-              <button class="button-location waves-effect waves-light btn"> <i class="material-icons">location_on</i></button>
+              <button id="loc" class="button-location waves-effect waves-light btn"> <i class="material-icons">location_on</i></button>
               <div class="" style="display:inline-block;margin-left:10px;">
                 Enter your location
               </div>

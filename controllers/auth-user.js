@@ -11,23 +11,27 @@ const puretext = require('puretext');
 
 module.exports={
 	signup:function(req,res){
-		if(req.body.name==undefined || req.body.phone==undefined || req.body.location==undefined || req.body.lang==undefined || req.body.otp==undefined || req.body.face_rec==undefined){
+		if(req.body.name==undefined || req.body.phone==undefined){
 			return res.json({success:false,message:"Enter all the details",code:500});
 		}
-		return user.create(req.body.name,req.body.phone,req.body.location,req.body.lang,req.body.otp,req.body.face_rec)
-			.then(function(result){
-				if(result.success==false){
+		let result;
+		return user.create(req.body.name,req.body.phone,req.body.location,req.body.lang,req.body.otp)
+			.then(function(resp){
+				if(resp.success==false){
 					return res.json({success:false,message:"User exists. Try logging in."});
 				}
-				return jwt.sign({id:result._id}.process.env.JWT_SECRET,function(err,token){
+				result=resp.data;
+				return jwt.sign({id:result._id},process.env.JWT_SECRET,function(err,token){
 					if(err){
 						return res.json({success:false,message:"Application Error",code:500});
 					}
 					res.cookie('FF',token, { maxAge: 900000, httpOnly: true })
-					return res.render("dashboard",{name:result.name,listings:result.listings,message:"Signup successful"});
+					console.log(result);
+					return res.json({success:true,message:"Successfully signed up"})
 				})
 			})
 			.catch(function(err){
+				console.log(err);
 				return res.json({success:false,message:"Application Error",code:500});
 			});
 	},
@@ -79,7 +83,7 @@ module.exports={
 						return res.json({success:false,message:"Application Error",code:500});
 					}
 					res.cookie('FF',token, { maxAge: 900000, httpOnly: true })
-					return res.render("dashboard",{name:result.name,listings:result.listings});
+					return res.json({success:true,message:"Logged in"})
 				})
 			})
 			.catch(function(err){

@@ -28,10 +28,11 @@ var upload2 = multer({ storage: storage2 })
 
 var {signup,generateOTP,login}=require(process.cwd()+"/controllers/auth-user.js");
 
-router.post("/signup",upload.single("image"),function(req,res){
+router.post("/signup",function(req,res){
+  console.log(req.body);
 	return signup(req,res);
 });
-router.post("/login",upload2.single("image"),function(req,res){
+router.post("/login",function(req,res){
 	return login(req,res);
 });
 router.post("/genOTP",function(req,res){

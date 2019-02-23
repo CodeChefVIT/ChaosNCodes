@@ -5,13 +5,31 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="/js/dashboard.js"></script>
+    <script src="/js/prediction.js"></script>
     <style>
     .nav-bar{
       position: absolute;
       top:0;
       z-index: 1;
       background-color: #002540
+    }
+    .predict_header{
+      border-bottom-color: #F60100;
+      font-size: 18px;
+      border-bottom-width: 2px;
+      padding-bottom: 5px;
+      border-bottom-style: solid;
+      width: 300px;
+      text-align: center;
+      margin:0 auto;
+    }
+    .current{
+      border-bottom-color: #F60100;
+      font-size: 25px;
+      border-bottom-width: 2px;
+      border-bottom-style: solid;
+      width: 300px;
+      text-align: center;
     }
     .item{
       display: flex;
@@ -38,24 +56,16 @@
     .item-details{
 
     }
-    .current{
-      border-bottom-color: #F60100;
-      font-size: 25px;
-      border-bottom-width: 2px;
-      border-bottom-style: solid;
-      width: 300px;
-      text-align: center;
-    }
     </style>
 
 </head>
 <body>
   <nav class="nav-wrapper nav-bar">
-    <a href="#" style="margin-left:20px" class="brand-logo"><%= name %></a>
+    <a href="#" style="margin-left:20px" class="brand-logo">Farmazon</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/dashboard">Dashboard</a></li>
         <li><a href="/">Marketplace</a></li>
         <li><a href="/">Newsfeed</a></li>
-        <li><a href="/prediction">Prediction</a></li>
         <li><a href="/">Transactions</a></li>
         <li><button class="waves-effect waves-light btn" style="margin-right:10px;background-color:#F60100;">Logout</button></li>
       </ul>
@@ -63,56 +73,45 @@
   <br><br><br><br><br><br>
   <div class="container-fluid">
     <div class="row" style="display:flex;justify-content: center;">
-      <div class="col s10 m6 l4" style="margin:0 auto;">
-        <div class="current" style="margin:0 auto;">Current listings</div>
-        <br>
-        <div class="collection">
-        <% listings.forEach(function(listing){ %>
-          <% if(!listing.listing.expired) { %>
-            <div class="collection-item item">
-              <div class="item-division">
-                <img class="img-item" src="<%= listing.listing.image %>">
-              </div>
-              <div class="item-division2">
-                <div><%= listing.listing.name %></div>
-                <div><%= listing.listing.date %></div>
-                <div><%= listing.listing.type %></div>
-                <div><%= listing.listing.quantity %></div>
-                <button class="waves-effect waves-light btn" onclick="fetchData(<%= listing.listing._id %>)">Learn more</button>
-              </div>
+      <div class="col s11 m7 l5" style="margin:0 auto;">
+
+        <form id="predict-form" class="col s12" style="margin:0 auto;">
+          <div class="predict_header">Get correct predictions with us.</div>
+          <br><br>
+          <div id="KEY" class="row">
+            <div class="input-field col s12">
+              <input id="key" type="text" class="validate">
+              <label for="key">Enter your product key</label>
             </div>
-          <% } %>
-        <% }) %>
-        </div>
+          </div>
+          <input id="prediction" value="Get your crops now" style="width:100%;" type="submit" class="col s12 waves-effect waves-light btn">
+        </form>
+
       </div>
     </div>
   </div>
-  <br><br><br>
   <div class="container-fluid">
+    <% if(locals.crops) {%>
     <div class="row" style="display:flex;justify-content: center;">
       <div class="col s10 m6 l4" style="margin:0 auto;">
-        <div class="current" style="margin:0 auto;">Expired listings</div>
+        <div class="current" style="margin:0 auto;">Possible crops</div>
         <br>
         <div class="collection">
-        <% listings.forEach(function(listing){ %>
-          <% if(listing.listing.expired) { %>
-            <div class="collection-item item">
+        <% crops.forEach(function(crop){ %>
+          <div class="collection-item item">
               <div class="item-division">
-                <img class="img-item" src="<%= listing.listing.image %>">
+                <img class="img-item" src="<%= crop.image %>">
               </div>
               <div class="item-division2">
-                <div><%= listing.listing.name %></div>
-                <div><%= listing.listing.date %></div>
-                <div><%= listing.listing.type %></div>
-                <div><%= listing.listing.quantity %></div>
-                <button class="waves-effect waves-light btn" onclick="fetchData(<%= listing.listing._id %>)">Learn more</button>
+                <div><%= crop.name %></div>
+                <div><%= crop.profit %></div>
               </div>
             </div>
-          <% } %>
         <% }) %>
         </div>
       </div>
     </div>
+    <% } %>
   </div>
 </body>
 </html>
