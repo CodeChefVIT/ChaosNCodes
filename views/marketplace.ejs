@@ -70,17 +70,17 @@
         <br>
         <div class="collection">
         <% listings.forEach(function(listing){ %>
-          <% if(!listing.listing.expired) { %>
+          <% if(!listing.expired) { %>
             <div class="collection-item item">
               <div class="item-division">
-                <img class="img-item" src="<%= listing.listing.image %>">
+                <img class="img-item" src="<%= listing.image %>">
               </div>
               <div class="item-division2">
-                <div><%= listing.listing.name %></div>
-                <div><%= listing.listing.date %></div>
-                <div><%= listing.listing.type %></div>
-                <div><%= listing.listing.quantity %></div>
-                <button class="waves-effect waves-light btn" onclick="fetchData(<%= listing.listing._id %>)">Learn more</button>
+                <div><%= listing.product_type %></div>
+                <div><%= listing.date %></div>
+                <div><%= listing.type %></div>
+                <div><%= listing.quantity %></div>
+                <button class="waves-effect waves-light btn" onclick="fetchData(<%= listing._id %>)">Learn more</button>
               </div>
             </div>
           <% } %>

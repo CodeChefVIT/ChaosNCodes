@@ -14,6 +14,8 @@ var router=require(process.cwd()+'/routes/export.js')
 
 var app = express();
 
+var {create}=require(process.cwd()+"/controllers/add-listing.js")
+
 
 app.disable("x-powered-by");
 app.set('trust proxy', 1) // trust first proxy
@@ -64,8 +66,14 @@ app.get('/marketplace',authorise,function(req,res){
   getProducts(req,res);
 });
 
+
+
+
 app.get('/add',authorise,function(req,res){
   res.render("product-add")
+})
+app.post('/add/createListing',authorise,function(req,res){
+  return create(req,res)
 })
 
 app.get('/prediction',function(req,res){
@@ -74,4 +82,7 @@ app.get('/prediction',function(req,res){
 
 app.use("/api",router);
 
+app.use("*",function(req,res){
+  res.send("Erorr")
+})
 module.exports=app;

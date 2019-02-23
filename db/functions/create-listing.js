@@ -26,6 +26,7 @@ module.exports.products={
 					return User.findOneAndUpdate({_id:by},{$push:{listings:{listing:result._id}}},{new:true});
 				})
 				.then(function(result){
+					console.log(result);
 					if(result==null){
 						return resolve({success:false,message:"Error adding listing"});
 					}
@@ -69,7 +70,7 @@ module.exports.products={
 	},
 	getProducts:function(){
 		return new Promise(function(resolve,reject){
-			return listing.find({},"name image date price")
+			return listing.find({},"name image product_type type date price")
 				.then(function(result){
 					if(result==null){
 						return reject({success:false,code:401,message:"Error getting listings"});
