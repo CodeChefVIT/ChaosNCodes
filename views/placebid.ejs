@@ -8,6 +8,7 @@
     <script src="/js/dashboard.js"></script>
     <script src="/js/marketplace.js"></script>
     <script src="/js/logout.js"></script>
+    <script src="/js/bid.js"></script>
     <style>
     .nav-bar{
       position: absolute;
@@ -52,25 +53,6 @@
 
 </head>
 <body>
-  <div class="modal">
-    <div class="modal-content">
-      <form id="bid">
-        <div class="row">
-          <div class="input-field col s12 l6 m6">
-            <input id="price" type="number" class="validate">
-            <label for="price">Price</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12 l6 m6">
-            <input id="quantity" type="number" class="validate">
-            <label for="quantity">Quantity</label>
-          </div>
-        </div>
-        <input type="submit" value="Send bid" class="col s12 waves-effect waves-light btn">
-      </form>
-    </div>
-  </div>
   <nav class="nav-wrapper nav-bar">
     <a href="#" style="margin-left:20px" class="brand-logo"><%= name %></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -78,37 +60,28 @@
         <li><a href="/">Newsfeed</a></li>
         <li><a href="/prediction">Prediction</a></li>
         <li><a href="/">Transactions</a></li>
-        <li><a href="/add">Add a product</a></li>
+        <li><a href="/marketplace">Marketplace</a></li>
         <li><button id="logout" class="waves-effect waves-light btn" id="logout" style="margin-right:10px;background-color:#F60100;">Logout</button></li>
       </ul>
   </nav>
   <br><br><br><br><br><br>
   <div class="container-fluid">
-    <div class="row" style="display:flex;justify-content: center;">
-      <div class="col s10 m6 l4" style="margin:0 auto;">
-        <div class="current" style="margin:0 auto;">Products</div>
-        <br>
-        <div class="collection">
-        <% listings.forEach(function(listing){ %>
-          <% if(!listing.expired) { %>
-            <div class="collection-item item">
-              <div class="item-division">
-                <img class="img-item" src="<%= listing.image %>">
-              </div>
-              <div class="item-division2">
-                <div><%= listing.product_type %></div>
-                <div><%= listing.date %></div>
-                <div><%= listing.price %></div>
-                <div><%= listing.type %></div>
-                <div><%= listing.quantity %></div>
-                <a href="/placebid?id=<%= listing._id %>&by=<%= listing.by %>" class="waves-effect waves-light btn">Place bid</a>
-              </div>
-            </div>
-          <% } %>
-        <% }) %>
+    <div class="row" style="display:flex;align-content:center;">
+      <form id="place" class="col l5 m6 s12" style="margin:0 auto;">
+        <div id="QNT" class="row" style="margin:0 auto;">
+          <div class="input-field col s12 l6 m6">
+            <input id="price" type="number" class="validate">
+            <label for="price">Price</label>
+          </div>
+          <div class="input-field col s12 l6 m6">
+            <input id="quantity" type="number" class="validate">
+            <label for="quantity">Quantity</label>
+          </div>
         </div>
-      </div>
+        <input type="submit" value="Place your bid" class="col s12 waves-effect waves-light btn">
+      </form>
     </div>
   </div>
+
 </body>
 </html>

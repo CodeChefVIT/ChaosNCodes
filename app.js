@@ -75,6 +75,9 @@ app.get('/add',authorise,function(req,res){
 app.post('/add/createListing',authorise,function(req,res){
   return create(req,res)
 })
+app.get('/placebid',authorise,function(req,res){
+  return res.render("placebid",{name:req.body.name})
+})
 
 app.get('/prediction',function(req,res){
   return res.render("prediction",{crops:[{image:'/images/wheat.jpg',name:"wheat",profit:"10000"},{image:'/images/wheat.jpg',name:"wheat",profit:"10000"},{image:'/images/wheat.jpg',name:"wheat",profit:"10000"}]})

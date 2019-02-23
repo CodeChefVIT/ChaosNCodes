@@ -70,7 +70,7 @@ module.exports.products={
 	},
 	getProducts:function(){
 		return new Promise(function(resolve,reject){
-			return listing.find({},"name image product_type type date price")
+			return listing.find({},"name image product_type type date price current_quantity by")
 				.then(function(result){
 					if(result==null){
 						return reject({success:false,code:401,message:"Error getting listings"});
@@ -85,7 +85,7 @@ module.exports.products={
 	},
 	getProduct:function(listing){
 		return new Promise(function(resolve,reject){
-			return listing.findOne({_id:listing},"name image type date price quantity current_quantity")
+			return listing.findOne({_id:listing},"name image type date price quantity current_quantity by")
 				.then(function(result){
 					if(result==null){
 						return reject({success:false,code:401,message:"Error getting listings"});

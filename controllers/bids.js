@@ -7,20 +7,21 @@ module.exports={
 		if(req.body.to==undefined || req.body.listing==undefined || req.body.quantity==undefined || req.body.amount==undefined){
 			return res.json({success:false,message:"Enter all the details",code:500});
 		}
-		return user.checkVerify(req.session.user_id)
-			.then(function(result){
-				if(result.success==false){
-					return res.json({success:false,message:"Please verify your account",code:401});
-				}
-				return bids.createBid(req.session.user_id,req.body.to,req.body.listing,req.body.quantity,req.body.amount);
-			})
+		// return user.checkVerify(req.session.user_id)
+		// 	.then(function(result){
+		// 		if(result.success==false){
+		// 			return res.json({success:false,message:"Please verify your account",code:401});
+		// 		}
+				return bids.createBid(req.body.id,req.body.to,req.body.listing,req.body.quantity,req.body.amount)
+			// })
 			.then(function(result){
 				if(result.success==false){
 					return res.json({success:false,message:"Error adding bid",code:401});
 				}
-				return res.render("product",{message:"Bid added"});
+				return res.json({success:true,message:"Added bids successfully"})
 			})
 			.catch(function(err){
+				console.log(err);
   				return res.json({success:false,message:"Application Error",code:500});
   			});
 	},

@@ -1,12 +1,12 @@
 var {bids,listing}=require(process.cwd()+"/db/models/listings.js");
 
 module.exports.bids={
-	createBid:function(from,to,listing,quantity,amount){
+	createBid:function(from,to,id,quantity,amount){
 		return new Promise(function(resolve,reject){
-			let Bid=new bid({
+			let Bid=new bids({
 				by:from,
 				to:to,
-				listing:listing,
+				listing:id,
 				amounts:[
 					{quantity:quantity,amount:amount,status:"none"}
 				]
@@ -16,7 +16,7 @@ module.exports.bids={
 					if(result.success==false){
 						return resolve({success:false,message:"Error adding bid"});
 					}
-					return listing.findOneAndUpdate({_id:listing},{$push:{bids:{bid:result._id}}});
+					return listing.findOneAndUpdate({_id:id},{$push:{bids:{bid:result._id}}});
 				})
 				.then(function(result){
 					if(result.success==false){
