@@ -11,11 +11,13 @@ module.exports.bids={
 					{quantity:quantity,amount:amount,status:"none"}
 				]
 			});
+			console.log(from)
 			return Bid.save()
 				.then(function(result){
 					if(result.success==false){
 						return resolve({success:false,message:"Error adding bid"});
 					}
+					console.log(result);
 					return listing.findOneAndUpdate({_id:id},{$push:{bids:{bid:result._id}}});
 				})
 				.then(function(result){

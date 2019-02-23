@@ -6,8 +6,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="/js/dashboard.js"></script>
-    <script src="/js/marketplace.js"></script>
-    <script src="/js/logout.js"></script>
     <style>
     .nav-bar{
       position: absolute;
@@ -52,34 +50,14 @@
 
 </head>
 <body>
-  <div class="modal">
-    <div class="modal-content">
-      <form id="bid">
-        <div class="row">
-          <div class="input-field col s12 l6 m6">
-            <input id="price" type="number" class="validate">
-            <label for="price">Price</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12 l6 m6">
-            <input id="quantity" type="number" class="validate">
-            <label for="quantity">Quantity</label>
-          </div>
-        </div>
-        <input type="submit" value="Send bid" class="col s12 waves-effect waves-light btn">
-      </form>
-    </div>
-  </div>
   <nav class="nav-wrapper nav-bar">
     <a href="#" style="margin-left:20px" class="brand-logo"><%= name %></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="/dashboard">Dashboard</a></li>
-        <li><a href="/">Newsfeed</a></li>
+        <li><a href="/marketplace">Marketplace</a></li>
+        <li><a href="/newsfeed">Newsfeed</a></li>
         <li><a href="/prediction">Prediction</a></li>
-        <li><a href="/history">Transactions</a></li>
-        <li><a href="/add">Add a product</a></li>
-        <li><button id="logout" class="waves-effect waves-light btn" id="logout" style="margin-right:10px;background-color:#F60100;">Logout</button></li>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><button class="waves-effect waves-light btn" style="margin-right:10px;background-color:#F60100;">Logout</button></li>
       </ul>
   </nav>
   <br><br><br><br><br><br>
@@ -89,26 +67,38 @@
         <div class="current" style="margin:0 auto;">Products</div>
         <br>
         <div class="collection">
-        <% listings.forEach(function(listing){ %>
-          <% if(!listing.expired) { %>
+        <% data.forEach(function(listing){ %>
             <div class="collection-item item">
               <div class="item-division">
-                <img class="img-item" src="<%= listing.image %>">
+                <img class="img-item" src="<%= listing.listing.image %>">
               </div>
               <div class="item-division2">
-                <div><%= listing.product_type %></div>
-                <div><%= listing.date %></div>
-                <div><%= listing.price %></div>
-                <div><%= listing.type %></div>
-                <div><%= listing.quantity %></div>
-                <a href="/placebid?id=<%= listing._id %>&by=<%= listing.by %>" class="waves-effect waves-light btn">Place bid</a>
+                <div style="font-size:15px;">Product details</div>
+                <div><%= listing.listing.product_type %></div>
+                <div><%= listing.listing.date %></div>
+                <div>Price:<%= listing.listing.price %></div>
+                <div>Type:<%= listing.listing.type %></div>
+                <div>Quantity: <%= listing.listing.quantity %></div>
+                <div>Left: <%= listing.listing.current_quantity %></div>
+                <div>To: <%= listing.to.name %></div>
+                <div>By: <%= listing.by.name %></div>
+                <div style="font-size:15px;">Bids</div>
+                <div style="border-bottom-style:solid;border-bottom-width:2px;display:flex;flex-direction: column;padding-bottom:5px;">
+                <% listing.amounts.forEach(function(amount){ %>
+                  <div>Price: <%= amount.amount %></div>
+                  <div>Quantity: <%= amount.quantity %></div>
+                  <div>Status: <%= amount.status %></div>
+                  <a href="/respondToBid?bid_id=<%= amount._id %>&bid=<%= listing._id %>" class="waves-effect waves-light btn">Respond</a>
+                <% }) %>
+
               </div>
             </div>
-          <% } %>
         <% }) %>
         </div>
       </div>
     </div>
   </div>
+
+
 </body>
 </html>

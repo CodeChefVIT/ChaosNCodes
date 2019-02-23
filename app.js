@@ -9,6 +9,7 @@ var jwt=require("jsonwebtoken");
 
 var fetchDashboard=require("./controllers/add-listing.js").getListing;
 var getProducts=require("./controllers/get-products").getProducts;
+var history=require("./controllers/view-transactions.js").get;
 
 var router=require(process.cwd()+'/routes/export.js')
 
@@ -72,6 +73,11 @@ app.get('/marketplace',authorise,function(req,res){
 app.get('/add',authorise,function(req,res){
   res.render("product-add")
 })
+
+app.get('/history',authorise,function(req,res){
+  return history(req,res);
+})
+
 app.post('/add/createListing',authorise,function(req,res){
   return create(req,res)
 })

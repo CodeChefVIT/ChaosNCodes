@@ -64,7 +64,7 @@ var bids=new mongoose.Schema({
 	},
 	listing:{
 		type:mongoose.Schema.Types.ObjectId,
-		ref:"listing"
+		ref:"listings"
 	},
 	to:{
 		type:mongoose.Schema.Types.ObjectId,
