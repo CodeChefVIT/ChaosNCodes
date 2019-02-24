@@ -95,7 +95,7 @@ module.exports.user={
 	},
 	findUser:function(user){
 		return new Promise(function(resolve,reject){
-			return User.findOne({_id:user}).populate([{path:"listings.listing",select:"expired name _id product_type type image date quantity"}])
+			return User.findOne({_id:user}).populate([{path:"listings.listing",select:"expired name _id product_type type image current_quantity date quantity"}])
 				.then(function(result){
 					if(result==null){
 						return reject({success:false,code:404,message:"User not found"});

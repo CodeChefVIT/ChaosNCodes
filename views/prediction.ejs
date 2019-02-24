@@ -176,18 +176,12 @@
     <div class="row" style="display:flex;justify-content: center;">
       <div class="col s11 m7 l5" style="margin:0 auto;">
 
-        <form id="predict-form" class="col s12" style="margin:0 auto;">
+        <div id="predict-form" class="col s12" style="margin:0 auto;">
           <div class="predict_header" style="color:#026670;">Get correct predictions with us.</div>
           <br><br>
-          <div id="KEY" class="row">
-            <div class="input-field col s12">
-              <input id="key" type="text" class="validate">
-              <label for="key">Enter your product key</label>
-            </div>
-          </div>
-          <input id="button" value="Get your crops now" style="width:100%;" type="submit" class="col s12 waves-effect waves-light btn">
-        </form>
 
+          <a href="/prediction?generate=1" id="button" style="width:100%;" type="submit" class="col s12 waves-effect waves-light btn">Get your crops now</a>
+        </div>
       </div>
     </div>
   </div>
@@ -198,17 +192,7 @@
         <div class="current" style="margin:0 auto;">Possible crops</div>
         <br>
         <div class="collection">
-        <% crops.forEach(function(crop){ %>
-          <div class="collection-item item">
-              <div class="item-division">
-                <img class="img-item" src="<%= crop.image %>">
-              </div>
-              <div class="item-division2" style="color:black;">
-                <div><%= crop.name %></div>
-                <div><%= crop.profit %></div>
-              </div>
-            </div>
-        <% }) %>
+          <%= crops %>
         </div>
       </div>
     </div>

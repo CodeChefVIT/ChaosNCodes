@@ -202,9 +202,10 @@
               <div class="item-division2">
                 <div><%= listing.product_type %></div>
                 <div><%= listing.date %></div>
-                <div><%= listing.price %></div>
+                <div>Price: <%= listing.price %></div>
                 <div><%= listing.type %></div>
-                <div><%= listing.quantity %></div>
+                <div>Quantity: <%= listing.quantity %></div>
+                <div>Quantity left: <%= listing.current_quantity %></div>
                 <a href="/placebid?id=<%= listing._id %>&by=<%= listing.by %>" id="button" class="waves-effect waves-light btn">Place bid</a>
               </div>
             </div>

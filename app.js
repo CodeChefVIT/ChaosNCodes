@@ -10,6 +10,7 @@ var jwt=require("jsonwebtoken");
 var fetchDashboard=require("./controllers/add-listing.js").getListing;
 var getProducts=require("./controllers/get-products").getProducts;
 var history=require("./controllers/view-transactions.js").get;
+var predictor=require("./ml/predictor.js");
 
 var router=require(process.cwd()+'/routes/export.js')
 
@@ -93,8 +94,11 @@ app.get('/addToBid',authorise,function(req,res){
   return res.render("addbid",{name:req.body.name})
 })
 
-app.get('/prediction',function(req,res){
-  return res.render("prediction",{crops:[{image:'/images/wheat.jpg',name:"wheat",profit:"10000"},{image:'/images/wheat.jpg',name:"wheat",profit:"10000"},{image:'/images/wheat.jpg',name:"wheat",profit:"10000"}]})
+app.get('/prediction',authorise,function(req,res){
+  if(req.query.generate=="0" || req.query.generate==undefined){
+    return res.render("prediction")
+  }
+  predictor(req,res);
 })
 
 app.use("/api",router);
