@@ -12,8 +12,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="/js/dashboard.js"></script>
+      <script src="/js/logout.js"></script>
     <style>
 
     .item{
@@ -29,7 +31,7 @@
       align-items: center;
     }
     .item-division2{
-      width:50%;
+      width:100%;
       display: flex;
       flex-direction: column;
     }
@@ -145,7 +147,10 @@
       .about-body{
         font-size:15px;
       }
-
+      .item-division{
+        display: flex;
+        flex-direction: column;
+      }
     </style>
 
 </head>
@@ -157,49 +162,58 @@
         <li><a href="/newsfeed">Newsfeed</a></li>
         <li><a href="/prediction">Prediction</a></li>
         <li><a href="/dashboard">Dashboard</a></li>
-        <li><button class="waves-effect waves-light btn" style="margin-right:10px;background-color:#F60100;">Logout</button></li>
+        <li><button id="logout" class="waves-effect waves-light btn" style="margin-right:10px;background-color:#F60100;">Logout</button></li>
       </ul>
   </nav>
   <br><br><br><br><br><br>
   <div class="container-fluid">
     <div class="row" style="display:flex;justify-content: center;">
-      <div class="col s10 m6 l4" style="margin:0 auto;">
-        <div class="current" style="margin:0 auto;color::#F9F6A1;>Products</div>
+      <div class="col s12 m8 l6" style="margin:0 auto;">
+        <div class="current" style="margin:0 auto;color:#026670";>Transactions</div>
         <br>
         <div class="collection">
         <% data.forEach(function(listing){ %>
             <div class="collection-item item">
-              <div class="item-division">
-                <img class="img-item" src="<%= listing.listing.image %>">
-              </div>
-              <div class="item-division2">
-                <div style="font-size:15px;">Product details</div>
+              <div class="item-division col s12 m6 l6">
+                <img class="new-item img-item" src="<%= listing.listing.image %>">
+                <br>
+                <div class="new-item ">
                 <div><%= listing.listing.product_type %></div>
                 <div><%= listing.listing.date %></div>
                 <div>Price:<%= listing.listing.price %></div>
+                </div>
+              </div>
+              <div class="item-division2 col s12 m6 l6">
+                <div style="font-size:20px;">Product details</div>
                 <div>Type:<%= listing.listing.type %></div>
                 <div>Quantity: <%= listing.listing.quantity %></div>
                 <div>Left: <%= listing.listing.current_quantity %></div>
                 <div>To: <%= listing.to.name %></div>
                 <div>By: <%= listing.by.name %></div>
-                <div style="font-size:15px;">Bids</div>
+                <div style="font-size:20px;">Bids</div>
                 <% listing.amounts.forEach(function(amount){ %>
-                <div style="border-bottom-style:solid;border-bottom-width:2px;display:flex;flex-direction: column;padding-bottom:5px;">
-                  <div>Price: <%= amount.amount %></div>
-                  <div>Quantity: <%= amount.quantity %></div>
-                  <div>Status: <%= amount.status %></div>
-                  <a href="/respondToBid?bid_id=<%= amount._id %>&bid=<%= listing._id %>" class="waves-effect waves-light btn">Respond</a>
-              </div>
+                <a class='dropdown-trigger btn' href='#' data-target='<%= amount._id %>'>View Bid</a>
+                <ul id='<%= amount._id %>' class='dropdown-content'>
+                <li><a href="#!">Price: <%= amount.amount %></a></li>
+                <li><a href="#!">Quantity: <%= amount.quantity %></a></li>
+                <li><a href="#!">Status: <%= amount.status %></a></li>
+                <li class="divider" tabindex="-1"></li>
+                <% if(listing.by._id == id){ %>
+                    <li><a href="#!"><a href="/respondToBid?bid_id=<%= amount._id %>&bid=<%= listing._id %>" id="button" class="waves-effect waves-light btn disabled">Respond</a></a></li>
+                  <% } %>
+                  <% if(listing.by._id != id) { %>
+                    <li><a href="#!"><a href="/respondToBid?bid_id=<%= amount._id %>&bid=<%= listing._id %>" id="button" class="waves-effect waves-light btn">Respond</a></a></li>
+                  <% } %>
+                </ul>
               <% }) %>
-              <a href="/addToBid?bid_id=<%= listing._id %>" style="width:50px;height: 50px;border-radius: 50%;" class="waves-effect waves-light btn"><i class="material-icons">add</i></a>
+              </div>
+              <a href="/placebid?id=<%= listing.listing._id %>&by=<%= listing.listing.by %>" style="width:50px;height: 50px;border-radius: 50%;display: flex;justify-content:center;align-items: center;" class="waves-effect waves-light btn"><i class="material-icons">add</i></a>
             </div>
+            <% }) %>
             </div>
-        <% }) %>
-
-      </div>
     </div>
   </div>
-
+</div>
 
 </body>
 </html>

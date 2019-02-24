@@ -8,7 +8,7 @@ module.exports={
           return res.render("dashboard",{message:"Error getting transactions"})
         }
         console.log(result.data)
-        return res.render("history",{name:req.body.name,data:result.data,message:"Transactions found"})
+        return res.render("history",{id:req.body.id,name:req.body.name,data:result.data,message:"Transactions found"})
       })
       .catch(function(err){
         return res.json({success:false,message:"Error getting data"})

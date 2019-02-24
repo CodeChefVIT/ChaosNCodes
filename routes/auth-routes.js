@@ -43,7 +43,7 @@ router.post("/genOTP",function(req,res){
 router.post("/logout",function(req,res){
   res.clearCookie("FF");
   console.log("Logging out")
-  return res.redirect("/")
+  return res.json({code:"/"})
 })
 
 module.exports=router;

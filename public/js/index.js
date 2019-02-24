@@ -1,4 +1,41 @@
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js',{
+      scope: '/'
+    }).then(function(registration) {
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }, function(err) {
+      console.log('ServiceWorker registration failed: ', err);
+    });
+  });
+}
+let deferredPrompt;
+window.addEventListener("beforeinstall",function(e){
+  e.preventDefault();
+  deferredPrompt=e;
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice
+    .then(function(choiceResult){
+      if(choiceResult.outcome==="accepted"){
+        console.log("User accepted the app install prompt")
+      }
+      else{
+        console.log("User rejected the app install prompt")
+      }
+      deferredPrompt=null;
+    });
+  // btnAdd.style.display="block";
+});
+// btnAdd.addEventListener("click",function(e){
+//   btnAdd.style.display="none";
+//
+//
+// })
+window.addEventListener("appinstalled",function(e){
+  app.logEvent("a2hs","installed");
+});
 $(document).ready(function(){
+  $('.sidenav').sidenav();
     let location;
     document.getElementById("signup-form").addEventListener("submit",function(e){
       e.preventDefault();

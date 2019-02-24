@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  $('.sidenav').sidenav();
   document.getElementById("place").addEventListener("submit",function(e){
     e.preventDefault();
     var xhr=new XMLHttpRequest();

@@ -12,6 +12,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+      <link rel="manifest" href="/manifest.json">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="/js/index.js"></script>
@@ -197,10 +198,6 @@
       <a href="#" style="margin-left:20px" class="brand-logo">Farmazon</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li><a href="/login">Login</a></li>
-          <li><a href="/">Marketplace</a></li>
-          <li><a href="/">Newsfeed</a></li>
-          <li><a href="/">About us</a></li>
-          <li><a href="/">Contact us</a></li>
         </ul>
     </nav>
     <div class="landing">
@@ -233,13 +230,13 @@
             </div>
             <div id="LOCATION" class="row">
               <div class="input-field col s12">
-              <button class="button-location waves-effect waves-light btn"> <i class="material-icons">location_on</i></button>
+              <button id="loc" class="button-location waves-effect waves-light btn"> <i class="material-icons">location_on</i></button>
               <div class="" style="display:inline-block;margin-left:10px;color:#F9F6A1;">
                 Enter your location
               </div>
             </div>
             </div>
-            <input id="button" value="Signup" style="width:100%;" type="submit" class="waves-effect waves-light btn">
+            <input value="Signup" style="width:100%;" type="submit" class="waves-effect waves-light btn">
             <div id="error"></div>
           </form>
         </div>
@@ -257,95 +254,6 @@
       </div>
     </div>
 
-  <section id="contact">
-    <div class="container-fluid">
-      <div class="row" style="display:flex;justify-content: center;align-items: center;">
-        <div class="col s12 m10 l8" style="margin:0 auto;">
-          <div class="about-header">Contact</div>
-          <br>
-          <div class="row">
-            <div class="col s4">
-              <div class="flip-card">
-                <div class="flip-card-inner">
-                  <div class="flip-card-front">
-                    <img src="images/healthcare.jpg" alt="Avatar" responsive width="300px" height="300px">
-                  </div>
-                  <div class="flip-card-back">
-                    <br><br><br><br>
-                    <h3>Manasa</h3>
-                    <p>Electrical</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col s4">
-              <div class="flip-card">
-                <div class="flip-card-inner">
-                  <div class="flip-card-front">
-                    <img src="images/research.jpg" alt="Avatar" responsive width="300px" height="300px">
-                  </div>
-                  <div class="flip-card-back">
-                    <br><br><br><br>
-                    <h3>Vatsal</h3>
-                    <p>Website</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col s4">
-              <div class="flip-card">
-                <div class="flip-card-inner">
-                  <div class="flip-card-front">
-                    <img src="images/humanresource.jpg" alt="Avatar" responsive width="300px" height="300px">
-                  </div>
-                  <div class="flip-card-back">
-                    <br><br><br><br>
-                    <h3>Radhika</h3>
-                    <p>Human Resource</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <br>
-
-          <div class="row">
-            <div class="col s8">
-              <div class="flip-card">
-                <div class="flip-card-inner">
-                  <div class="flip-card-front">
-                    <img src="images/healthcare.jpg" alt="Avatar" responsive width="300px" height="300px">
-                  </div>
-                  <div class="flip-card-back">
-                    <br><br><br><br>
-                    <h3>Arun</h3>
-                    <p>Machine Learning and Algorithms</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col s4">
-              <div class="flip-card">
-                <div class="flip-card-inner">
-                  <div class="flip-card-front">
-                    <img src="images/technical.jpg" alt="Avatar" responsive width="300px" height="300px">
-                  </div>
-                  <div class="flip-card-back">
-                    <br><br><br><br>
-                    <h3>Mihir</h3>
-                    <p>Website</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   </body>
 </html>
