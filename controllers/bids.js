@@ -25,11 +25,26 @@ module.exports={
   				return res.json({success:false,message:"Application Error",code:500});
   			});
 	},
+	getBid:function(req,res){
+		return bids.getBid(req.body.id,req.body.bid_id,req.body.bid)
+			.then(function(result){
+				if(result.success==false){
+					return res.json({success:false,message:"Error adding bid",code:401});
+				}
+				if(result.data==null){
+					return res.render("respond",{data:{amount:null,quantity:null},name:req.body.name,message:"Bid added"});
+				}
+				return res.render("respond",{data:result.data,name:req.body.name,message:"Bid added"});
+			})
+			.catch(function(err){
+  				return res.json({success:false,message:"Application Error",code:500});
+  			});
+	},
 	addToBid:function(req,res){
 		if(req.body.from==undefined || req.body.to==undefined || req.body.listing==undefined || req.body.quantity==undefined || req.body.amount==undefined){
 			return res.json({success:false,message:"Enter all the details",code:500});
 		}
-		return bids.addBid(req.body.id,req.session.user_id,req.body.quantity,req.body.amount)
+		return bids.addBid(req.body.bid_id,req.body.id,req.body.quantity,req.body.amount)
 			.then(function(result){
 				if(result.success==false){
 					return res.json({success:false,message:"Error adding bid",code:401});
@@ -40,16 +55,22 @@ module.exports={
   				return res.json({success:false,message:"Application Error",code:500});
   			});
 	},
-	respondToBid:function(req,res){
-		if(req.body.bid_id==undefined || req.body.amount_id==undefined || req.body.status==undefined){
+	postBid:function(req,res){
+		if(req.body.bid_id==undefined || req.body.bid==undefined || req.body.status==undefined){
 			return res.json({success:false,message:"Enter all the details",code:500});
 		}
-		return bids.respondToBid(req.body.id,req.body.bid_id,req.body.amount_id,req.body.status)
+		let status;
+		if(req.body.status){
+			status="accepted"
+		} else{
+			status="rejected"
+		}
+		return bids.respondToBid(req.body.id,req.body.bid_id,req.body.bid,status)
 			.then(function(result){
 				if(result.success==false){
 					return res.json({success:false,message:"Error responding to bid"});
 				}
-				if(result.status!=="accepted"){
+				if(status!=="accepted"){
 					return res.json({success:true,message:"Rejected"})
 				}
 				let quantity;

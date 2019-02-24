@@ -14,7 +14,7 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+    <script src="/js/index.js"></script>
     <style>
 
     span{
@@ -193,9 +193,6 @@
   </head>
 
   <body style="background-color:#033125">
-    <!-- <div class="message">
-        <%=message%>
-      </div> -->
     <nav class="nav-wrapper nav-bar">
       <a href="#" style="margin-left:20px" class="brand-logo">Farmazon</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -228,6 +225,12 @@
                 <label for="phone" id="phonelabel">Phone</label>
               </div>
             </div>
+            <div id="OTP" class="row">
+              <div class="input-field col s12">
+                <input id="otp" type="text" class="validate">
+                <label for="otp">OTP</label>
+              </div>
+            </div>
             <div id="LOCATION" class="row">
               <div class="input-field col s12">
               <button class="button-location waves-effect waves-light btn"> <i class="material-icons">location_on</i></button>
@@ -236,15 +239,6 @@
               </div>
             </div>
             </div>
-            <div class="file-field input-field">
-            <div class="btn">
-              <span id="file"><i class="fa fa-upload"></i>File</span>
-              <input type="file">
-            </div>
-            <div class="file-path-wrapper">
-              <input class="file-path validate" type="text">
-            </div>
-          </div>
             <input id="button" value="Signup" style="width:100%;" type="submit" class="waves-effect waves-light btn">
             <div id="error"></div>
           </form>

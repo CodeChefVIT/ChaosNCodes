@@ -62,14 +62,24 @@ module.exports.bids={
 				});
 		});
 	},
-	getBids:function(listing,user){
+	getBid:function(user,bid_id,bid){
 		return new Promise(function(resolve,reject){
-			return bids.find({listing:listing,$or:[{by:user},{to:user}]}).populate([{path:"to",select:"name phone"},{path:"by",select:"name phone"}])
+			return bids.find({_id:bid,to:user})
 				.then(function(result){
 					if(result==null){
 						return resolve({success:false,code:401,message:"Error getting bid"});
 					}
-					return resolve({success:true,message:"Found bids",data:result,code:200});
+					let amount;
+					console.log(result)
+					if(result.length==0){
+						return resolve({success:true,message:"Found bids",data:null ,code:200});
+					}
+					for(i=0;i<result.amounts.length;i++){
+						if(result.amounts[i]._id==bid){
+							amount=result.amounts[i];
+						}
+					}
+					return resolve({success:true,message:"Found bids",data:amount ,code:200});
 				})
 				.catch(function(err){
 					console.log(err);

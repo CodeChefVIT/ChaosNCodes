@@ -17,7 +17,7 @@ var app = express();
 
 var {create}=require(process.cwd()+"/controllers/add-listing.js")
 
-
+var getBid=require(process.cwd()+"/controllers/bids.js").getBid;
 app.disable("x-powered-by");
 app.set('trust proxy', 1) // trust first proxy
 
@@ -83,6 +83,14 @@ app.post('/add/createListing',authorise,function(req,res){
 })
 app.get('/placebid',authorise,function(req,res){
   return res.render("placebid",{name:req.body.name})
+})
+
+app.get('/respondToBid',authorise,function(req,res){
+  return getBid(req,res);
+})
+
+app.get('/addToBid',authorise,function(req,res){
+  return res.render("addbid",{name:req.body.name})
 })
 
 app.get('/prediction',function(req,res){

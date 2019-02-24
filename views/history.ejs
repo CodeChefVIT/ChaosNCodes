@@ -88,9 +88,10 @@
                   <div>Price: <%= amount.amount %></div>
                   <div>Quantity: <%= amount.quantity %></div>
                   <div>Status: <%= amount.status %></div>
-                  <a href="/api/respondToBid?bid_id=<%= amount._id %>&bid=<%= listing._id %>" class="waves-effect waves-light btn">Respond</a>
+                  <a href="/respondToBid?bid_id=<%= amount._id %>&bid=<%= listing._id %>" class="waves-effect waves-light btn">Respond</a>
               </div>
               <% }) %>
+              <a href="/addToBid?bid_id=<%= listing._id %>" style="width:50px;height: 50px;border-radius: 50%;" class="waves-effect waves-light btn"><i class="material-icons">add</i></a>
             </div>
             </div>
         <% }) %>
