@@ -4,7 +4,7 @@ var auth_routes=require("./auth-routes.js");
 var push=require("./insert.js");
 
 var {addBid}=require(process.cwd()+"/controllers/bids.js")
-
+var {postBid}=require(process.cwd()+"/controllers/bids.js")
 var jwt=require("jsonwebtoken")
 function authorise(req,res,next){
   let token=req.cookies["FF"];
@@ -28,5 +28,7 @@ router.post("/postbid",authorise,function(req,res){
   console.log(req.body)
   return addBid(req,res);
 })
-
+router.post("/respondToBid",function(req,res){
+  return postBid(req,res);
+})
 module.exports=router;

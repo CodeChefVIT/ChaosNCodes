@@ -41,16 +41,16 @@ module.exports={
   			});
 	},
 	respondToBid:function(req,res){
-		if(req.body.id==undefined || req.body.amount_id==undefined || req.body.status==undefined){
+		if(req.body.bid_id==undefined || req.body.amount_id==undefined || req.body.status==undefined){
 			return res.json({success:false,message:"Enter all the details",code:500});
 		}
-		return bids.respondToBid(req.session.user_id,req.body.id,req.body.amount_id,req.body.status)
+		return bids.respondToBid(req.body.id,req.body.bid_id,req.body.amount_id,req.body.status)
 			.then(function(result){
 				if(result.success==false){
 					return res.json({success:false,message:"Error responding to bid"});
 				}
 				if(result.status!=="accepted"){
-					return res.render("product",{message:"Rejected bid"});
+					return res.json({success:true,message:"Rejected"})
 				}
 				let quantity;
 				for(let i=0;i<result.data.amounts.length;i++){
@@ -64,7 +64,7 @@ module.exports={
 				if(result.success==false){
 					return res.json({success:false,message:"Error responding to bid",code:401});
 				}
-				return res.render("dashboard",{message:"Bid successfully accepted"});
+				return res.json({success:true,message:"Bid successfully accepted"});
 			})
 			.catch(function(err){
     				return res.json({success:false,message:"Application Error",code:500});

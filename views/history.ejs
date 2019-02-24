@@ -83,18 +83,18 @@
                 <div>To: <%= listing.to.name %></div>
                 <div>By: <%= listing.by.name %></div>
                 <div style="font-size:15px;">Bids</div>
-                <div style="border-bottom-style:solid;border-bottom-width:2px;display:flex;flex-direction: column;padding-bottom:5px;">
                 <% listing.amounts.forEach(function(amount){ %>
+                <div style="border-bottom-style:solid;border-bottom-width:2px;display:flex;flex-direction: column;padding-bottom:5px;">
                   <div>Price: <%= amount.amount %></div>
                   <div>Quantity: <%= amount.quantity %></div>
                   <div>Status: <%= amount.status %></div>
-                  <a href="/respondToBid?bid_id=<%= amount._id %>&bid=<%= listing._id %>" class="waves-effect waves-light btn">Respond</a>
-                <% }) %>
-
+                  <a href="/api/respondToBid?bid_id=<%= amount._id %>&bid=<%= listing._id %>" class="waves-effect waves-light btn">Respond</a>
               </div>
+              <% }) %>
+            </div>
             </div>
         <% }) %>
-        </div>
+
       </div>
     </div>
   </div>
